@@ -75,8 +75,11 @@
                 success: function (data) {
 
 
-                    if (data==1) {
-                        alert("插入成功");
+                    if (parseInt(data)>1) {
+                        alert("插入成功,可以进行自定义菜单配置");
+                        $("#homeUrl").html("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://www.mofangge.net/Parents/ParentMenu/OrgIndex/" + orgId + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");//首页
+                        $("#bindUrl").html("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://www.mofangge.net/Parents/ParentMenu/OrgBindStuAccount/" + orgId + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");//绑定
+                        $("#setUrl").css("display", "");
 
 
                     }
@@ -102,7 +105,7 @@
         <table class="go">
             <tr>
                 <td>机构名称:</td>
-                <td><input type="text" name="appid" id="orgName" maxlength="40" /></td>
+                <td><input type="text" name="appid" id="orgName" maxlength="40"/></td>
 
 
             </tr>
@@ -158,5 +161,16 @@
 
         </table>
     </form>
+    <div style="display: none" id="setUrl">
+        首页:<label id="homeUrl">
+            sdsadsad
+        </label>
+        <br/> <br />
+        绑定:<label id="bindUrl">
+        sdasdasd
+        </label>
+
+
+    </div>
 
 </div>
