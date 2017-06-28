@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "配置机构参数";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style type="text/css">
+    .go {
+        margin: 30px;
+        padding: 30px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        //alert("哈哈");
+
+        $("#btnOk").click(function () {
+            
+            var orgId = $("#orgId").val();
+            var appId = $("#appId").val();
+            var appSecret = $("#appSecret").val();
+            var begId = $("#begId").val();
+            var addCourseId = $("#addCourseId").val();
+            var cutCourseId = $("#cutCourseId").val();
+            var logMsgId = $("#logMsgId").val();
+            var backCourseId = $("#backCourseId").val();
+            if (!(+orgId>1)) {
+                alert("机构id为数字");
+                return;
+            }
+
+            if (appId=="") {
+                alert("appid必填");
+                return;
+            }
+            if (appSecret == "") {
+                alert("appSecret必填");
+                return;
+            }
+            if (begId == "") {
+                alert("原始id必填");
+                return;
+            }
+            if (addCourseId == "") {
+                alert("报课模板必填");
+                return;
+            }
+            if (cutCourseId == "") {
+                alert("下课模板必填");
+                return;
+            }
+           
+            if (logMsgId == "") {
+                alert("登录提醒模板必填");
+                return;
+            }
+            if (backCourseId == "") {
+                alert("退课模板必填");
+                return;
+            }
+            //提交表单
+            $.ajax({
+                type: "post",
+                url: "/Home/SetOrgWeChat",
+                dataType: "json",
+                data: {
+                    orgWeChat: { OrgId: orgId, AppId: appId, AppSecret: appSecret, BegId: begId, AddCourseId: addCourseId, CutCourseId: cutCourseId, LogMsgId: logMsgId, BackCourseId: backCourseId }
+
+                },
+                success: function (data) {
+
+
+                    if (data.Data == 1) {
+                        alert("上传成功");
+
+
+                    }
+                    else {
+
+
+
+                    }
+                }
+            });
+
+        });
+
+
+    });
+
+    
+
+
+</script>
+
+
+<div>
+    <form action="" method="post" enctype="multipart/form-data" name="form1">
+        <table class="go">
+            <tr>
+                <td>机构ID:</td>
+                <td><input type="text" name="appid" id="orgId" maxlength="40"/></td>
+
+
+            </tr>
+            <tr>
+                <td>开发者ID(AppID):</td>
+                <td><input type="text" name="appid" id="appId" maxlength="40"/></td>
+
+
+            </tr>
+            <tr>
+                <td>开发者密码(AppSecret):</td>
+                <td><input type="text" name="appid" id="appSecret" maxlength="40"/></td>
+            </tr>
+            <tr>
+                <td>原始ID:</td>
+                <td><input type="text" name="appid" id="begId" maxlength="40"/></td>
+            </tr>
+            <tr>
+
+                <td>报课模板ID:</td>
+                <td><input type="text" name="appid" id="addCourseId"/></td>
+
+            </tr>
+            <tr>
+
+                <td>下课模板ID:</td>
+                <td><input type="text" name="appid" id="cutCourseId"/></td>
+
+            </tr>
+            <tr>
+
+                <td>登录提醒模板ID:</td>
+                <td><input type="text" name="appid" id="logMsgId"/></td>
+
+            </tr>
+            <tr>
+
+                <td>退课模板ID:</td>
+                <td><input type="text" name="appid" id="backCourseId"/></td>
+
+            </tr>
+
+            <tr>
+                <td></td>
+                <td rowspan="2" colspan="2"><input type="button" value="提交" id="btnOk"/></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>

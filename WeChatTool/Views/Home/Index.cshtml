@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "魔方格微信配置工具";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<style type="text/css">
+
+    tr {
+        margin: 10px;
+        margin-top: 20px;
+
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    $(function() {
+
+        //alert("哈哈");
+
+        $("#btnUpload").click(function() {
+            debugger;
+            var s = document.form1.authFile.value;
+            if (s == "") {
+                alert("请选择文件之后上传");
+                return;
+            } else {
+              document.form1.submit();//提交表单
+               
+            }
+
+
+        });
+
+
+    });
+
+    function uploadFile() {
+
+        //加载列表
+        $.ajax({
+            type: "post",
+            url: "/Home/WechatUpload",
+            dataType: "json",
+            data: {
+                authFile: document.form1.authFile.value
+
+            },
+            success: function (data) {
+
+
+                if (data.Data == 1) {
+                    alert("上传成功");
+                  
+
+                }
+                else {
+
+
+
+                }
+            }
+        });
+
+    }
+
+
+</script>
+
+<form action="/Home/WechatUpload" method="post" enctype="multipart/form-data" name="form1">
+    <table>
+        <tr>
+            <td>授权文件:</td>
+            <td><input type="file" name="authFile"/></td>
+        </tr>
+      
+        <tr><td></td>
+            <td><input type="button" value="提交上传授权文件"  id="btnUpload" /></td>
+        </tr>
+
+    </table>
+</form>  
