@@ -17,20 +17,23 @@
         //alert("哈哈");
 
         $("#btnOk").click(function () {
-            
-            var orgId = $("#orgId").val();
-            var appId = $("#appId").val();
-            var appSecret = $("#appSecret").val();
-            var begId = $("#begId").val();
-            var addCourseId = $("#addCourseId").val();
-            var cutCourseId = $("#cutCourseId").val();
-            var logMsgId = $("#logMsgId").val();
-            var backCourseId = $("#backCourseId").val();
+            var orgName = $("#orgName").val().trim();
+            var orgId = $("#orgId").val().trim();
+            var appId = $("#appId").val().trim();
+            var appSecret = $("#appSecret").val().trim();
+            var begId = $("#begId").val().trim();
+            var addCourseId = $("#addCourseId").val().trim();
+            var cutCourseId = $("#cutCourseId").val().trim();
+            var logMsgId = $("#logMsgId").val().trim();
+            var backCourseId = $("#backCourseId").val().trim();
             if (!(+orgId>1)) {
                 alert("机构id为数字");
                 return;
             }
-
+            if (orgName == "") {
+                alert("机构名称必填");
+                return;
+            }
             if (appId=="") {
                 alert("appid必填");
                 return;
@@ -66,21 +69,19 @@
                 url: "/Home/SetOrgWeChat",
                 dataType: "json",
                 data: {
-                    orgWeChat: { OrgId: orgId, AppId: appId, AppSecret: appSecret, BegId: begId, AddCourseId: addCourseId, CutCourseId: cutCourseId, LogMsgId: logMsgId, BackCourseId: backCourseId }
+                    orgWeChat: { OrgName: orgName, OrgId: orgId, AppId: appId, AppSecret: appSecret, BegId: begId, AddCourseId: addCourseId, CutCourseId: cutCourseId, LogMsgId: logMsgId, BackCourseId: backCourseId }
 
                 },
                 success: function (data) {
 
 
-                    if (data.Data == 1) {
-                        alert("上传成功");
+                    if (data==1) {
+                        alert("插入成功");
 
 
                     }
                     else {
-
-
-
+                        alert(data);//上传失败
                     }
                 }
             });
@@ -99,6 +100,12 @@
 <div>
     <form action="" method="post" enctype="multipart/form-data" name="form1">
         <table class="go">
+            <tr>
+                <td>机构名称:</td>
+                <td><input type="text" name="appid" id="orgName" maxlength="40" /></td>
+
+
+            </tr>
             <tr>
                 <td>机构ID:</td>
                 <td><input type="text" name="appid" id="orgId" maxlength="40"/></td>
