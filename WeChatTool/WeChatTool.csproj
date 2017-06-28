@@ -221,6 +221,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\rz.png" />
+    <Content Include="Img\tip.jpg" />
+    <Content Include="Img\app.png" />
+    <Content Include="Img\add.png" />
+    <Content Include="Img\cut.png" />
+    <Content Include="Img\log.png" />
+    <Content Include="Img\tip5.png" />
+    <Content Include="Img\back.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

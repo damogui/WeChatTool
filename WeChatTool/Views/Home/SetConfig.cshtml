@@ -8,6 +8,21 @@
         margin: 30px;
         padding: 30px;
     }
+    .tip {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .btn {
+            border-color: #398439;background-color: #449d44; color: #fff;  border: 0; padding: 10px 55px 16px;display: inline-block;text-align: center;
+       
+
+    }
+    .btn:hover {
+        background-color: #398450;
+
+
+    }
 </style>
 
 <script type="text/javascript">
@@ -75,7 +90,8 @@
                 success: function (data) {
 
 
-                    if (parseInt(data)>1) {
+                    if (parseInt(data) > 1) {
+                        $("#tipDiv").css("display","none");
                         alert("插入成功,可以进行自定义菜单配置");
                         $("#homeUrl").html("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://www.mofangge.net/Parents/ParentMenu/OrgIndex/" + orgId + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");//首页
                         $("#bindUrl").html("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://www.mofangge.net/Parents/ParentMenu/OrgBindStuAccount/" + orgId + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");//绑定
@@ -117,7 +133,8 @@
             </tr>
             <tr>
                 <td>开发者ID(AppID):</td>
-                <td><input type="text" name="appid" id="appId" maxlength="40"/></td>
+                <td><input type="text" name="appid" id="appId" maxlength="40"/>
+                    <img src="~/Img/tip.jpg" id="tipAppId" class="tip"/></td>
 
 
             </tr>
@@ -127,50 +144,91 @@
             </tr>
             <tr>
                 <td>原始ID:</td>
-                <td><input type="text" name="appid" id="begId" maxlength="40"/></td>
+                <td><input type="text" name="appid" id="begId" maxlength="40"/><img src="~/Img/tip.jpg" id="tipBegId" class="tip"/></td>
             </tr>
             <tr>
 
                 <td>报课模板ID:</td>
-                <td><input type="text" name="appid" id="addCourseId"/></td>
+                <td><input type="text" name="appid" id="addCourseId"/><img src="~/Img/tip.jpg" id="tipAddCourseId" class="tip"/></td>
 
             </tr>
             <tr>
 
                 <td>下课模板ID:</td>
-                <td><input type="text" name="appid" id="cutCourseId"/></td>
+                <td><input type="text" name="appid" id="cutCourseId"/><img src="~/Img/tip.jpg" id="tipCutCourseId" class="tip"/></td>
 
             </tr>
             <tr>
 
                 <td>登录提醒模板ID:</td>
-                <td><input type="text" name="appid" id="logMsgId"/></td>
+                <td><input type="text" name="appid" id="logMsgId"/><img src="~/Img/tip.jpg" id="tipLogMsgId" class="tip"/></td>
 
             </tr>
             <tr>
 
                 <td>退课模板ID:</td>
-                <td><input type="text" name="appid" id="backCourseId"/></td>
+                <td><input type="text" name="appid" id="backCourseId"/><img src="~/Img/tip.jpg" id="tipBackCourseId" class="tip"/></td>
 
             </tr>
 
             <tr>
                 <td></td>
-                <td rowspan="2" colspan="2"><input type="button" value="提交" id="btnOk"/></td>
+                <td rowspan="2" colspan="2"><input type="button" value="提交" class="btn" style=""  id="btnOk"/></td>
             </tr>
 
         </table>
     </form>
+    <hr style="height:2px;border:none;border-top:2px dotted #449d44; " />
+    <div id="tipDiv"  style="display: none;" >
+        <img src="~/Img/tip5.png" id="tipImg"/>
+
+
+    </div>
     <div style="display: none" id="setUrl">
         首页:<label id="homeUrl">
-            sdsadsad
-        </label>
-        <br/> <br />
-        绑定:<label id="bindUrl">
-        sdasdasd
-        </label>
 
+        </label>
+        <br/> <br/>
+        绑定:<label id="bindUrl">
+
+        </label>
 
     </div>
 
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $(".tip").click(function () {
+            $("#tipDiv").css("display", "");
+            var id = this.id;
+            switch (id) {
+                case "tipAppId":
+                    $("#tipImg").attr("src", "/Img/app.png");
+                    break;
+                case "tipBegId":
+                    $("#tipImg").attr("src", "/Img/rz.png");
+                    break;
+                case "tipAddCourseId":
+                    $("#tipImg").attr("src", "/Img/add.png");
+                    break;
+                case "tipCutCourseId":
+                    $("#tipImg").attr("src", "/Img/cut.png");
+                    break;
+                case "tipLogMsgId":
+                    $("#tipImg").attr("src", "/Img/log.png");
+                    break;
+                case "tipBackCourseId":
+                    $("#tipImg").attr("src", "/Img/back.png");
+                    break;
+
+                
+            default:
+            }
+
+
+        });
+
+    })
+
+</script>
