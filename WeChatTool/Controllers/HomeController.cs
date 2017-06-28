@@ -42,6 +42,8 @@ namespace WeChatTool.Controllers
             JsonResult jsResult = new JsonResult() { JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             Stream uploadStream = null;
             FileStream fs = null;
+            string baseUrl = "";
+            string uploadPath = "";
             try
             {
                 //文件上传，一次上传1M的数据，防止出现大文件无法上传  
@@ -57,8 +59,8 @@ namespace WeChatTool.Controllers
                     jsResult.Data = "请选择文件之后再上传";
                     return jsResult;
                 }
-                string baseUrl = Server.MapPath("/");
-                string uploadPath = baseUrl + @"Upload\";
+                 baseUrl = Server.MapPath("/");
+                 uploadPath = baseUrl.Replace("parentSet","word") ;// @"Upload\"
                 fs = new FileStream(uploadPath + fileName, FileMode.Create, FileAccess.ReadWrite);
 
                 while ((contentLen = uploadStream.Read(buffer, 0, bufferLen)) != 0)
@@ -90,10 +92,11 @@ namespace WeChatTool.Controllers
                 }
             }
 
-            jsResult.Data = 1;
+            jsResult.Data = baseUrl;
             jsResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
 
             RedirectToAction("SetConfig");
+            //ViewBag.Path = uploadPath;
             return View("SetConfig");
 
 
